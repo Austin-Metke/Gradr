@@ -3,7 +3,10 @@ import json
 import random
 from typing import Optional
 
-from ..config import get_config
+try:
+    from ..config import get_config
+except ImportError:
+    from config import get_config
 
 try:
     import openai
