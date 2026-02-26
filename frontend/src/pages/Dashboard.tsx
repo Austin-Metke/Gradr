@@ -119,7 +119,7 @@ export function Dashboard(_props: DashboardProps) {
   return (
     <div className="h-screen flex bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Sidebar */}
-      <div className="w-80 border-r border-slate-700/50 flex flex-col bg-slate-900/50 backdrop-blur-sm">
+      <div className="w-80 border-r border-slate-700/50 flex flex-col overflow-y-auto bg-slate-900/50 backdrop-blur-sm">
         {/* Header */}
         <div className="p-5 border-b border-slate-700/50">
           <div className="flex items-center gap-3">
@@ -318,7 +318,7 @@ export function Dashboard(_props: DashboardProps) {
 
         {/* Student List */}
         {selectedAssignment && (
-          <div className="flex-1 overflow-auto p-4 border-b border-slate-700/50">
+          <div className="flex-1 min-h-[50vh] overflow-auto p-4 border-b border-slate-700/50">
             <div className="flex justify-between items-center mb-3">
               <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider">Students</h3>
               <span className="text-xs text-slate-500 bg-slate-800/50 px-2 py-1 rounded-full">{submissions.length}</span>
