@@ -28,7 +28,11 @@ export function SubmissionViewer({ submission, rubricText, onGradeChange, onRequ
   const handleAIGrade = async () => {
     if (!onRequestAIGrade) return;
     setIsGrading(true);
-    await onRequestAIGrade(submission.id);
+    try {
+      await onRequestAIGrade(submission.id);
+    } catch (err) {
+      console.error('Failed to grade with AI:', err);
+    }
     setIsGrading(false);
   };
 

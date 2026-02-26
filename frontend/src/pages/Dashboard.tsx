@@ -67,15 +67,23 @@ export function Dashboard(_props: DashboardProps) {
 
   const handleImport = async (file: File) => {
     if (!selectedAssignment) return;
-    await api.importFolder(selectedAssignment, file);
-    api.getSubmissions(selectedAssignment).then(setSubmissions);
+    try {
+      await api.importFolder(selectedAssignment, file);
+      api.getSubmissions(selectedAssignment).then(setSubmissions);
+    } catch (err) {
+      console.error('Failed to import submissions:', err);
+    }
   };
 
   const handleGradeAll = async () => {
     if (!selectedAssignment) return;
     setIsGrading(true);
-    await api.gradeAll(selectedAssignment);
-    api.getSubmissions(selectedAssignment).then(setSubmissions);
+    try {
+      await api.gradeAll(selectedAssignment);
+      api.getSubmissions(selectedAssignment).then(setSubmissions);
+    } catch (err) {
+      console.error('Failed to grade submissions:', err);
+    }
     setIsGrading(false);
   };
 
