@@ -52,13 +52,16 @@ class LLMProvider:
                 print("openai request failed", e)
         elif provider == "anthropic" and anthropic is not None:
             try:
-                client = anthropic.Client(api_key=os.getenv("ANTHROPIC_API_KEY"))
-                response = client.completions.create(
-                    model=model or "claude-3.5-mini",
+                client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+                response = client.messages.create(
+                    model=model or "claude-3-5-sonnet-20241022",
                     max_tokens=1000,
-                    prompt=anthropic.HUMAN_PROMPT + prompt + anthropic.AI_PROMPT,
+                    system=system_prompt or "",
+                    messages=[
+                        {"role": "user", "content": user_prompt},
+                    ],
                 )
-                return response.completion
+                return response.content[0].text
             except Exception as e:  # pragma: no cover
                 print("anthropic request failed", e)
         # stub fallback: produce simple JSON structure
