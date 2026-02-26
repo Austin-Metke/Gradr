@@ -3,7 +3,11 @@ import json
 import random
 from typing import Optional
 
-from ..config import get_config
+# Support both running as a package (from project root) and directly (from backend dir)
+try:
+    from ..config import get_config
+except ImportError:
+    from config import get_config
 
 try:
     import openai

@@ -9,26 +9,49 @@ from typing import Optional
 import base64
 import json
 
-from .db.database import (
-    create_assignment,
-    get_assignments,
-    create_submission,
-    update_submission_content,
-    get_submissions_by_assignment,
-    get_submission,
-    set_submission_grade,
-    set_final_grade,
-    export_grades,
-    get_assignment,
-)
-from .services.file_parser import (
-    group_files_by_student,
-    parse_python_file,
-    extract_screenshot_text,
-)
-from .services.llm_provider import LLMProvider
-from .services.grader import GradingService
-from .config import get_config, set_provider
+# Support both running as a package (from project root) and directly (from backend dir)
+try:
+    from .db.database import (
+        create_assignment,
+        get_assignments,
+        create_submission,
+        update_submission_content,
+        get_submissions_by_assignment,
+        get_submission,
+        set_submission_grade,
+        set_final_grade,
+        export_grades,
+        get_assignment,
+    )
+    from .services.file_parser import (
+        group_files_by_student,
+        parse_python_file,
+        extract_screenshot_text,
+    )
+    from .services.llm_provider import LLMProvider
+    from .services.grader import GradingService
+    from .config import get_config, set_provider
+except ImportError:
+    from db.database import (
+        create_assignment,
+        get_assignments,
+        create_submission,
+        update_submission_content,
+        get_submissions_by_assignment,
+        get_submission,
+        set_submission_grade,
+        set_final_grade,
+        export_grades,
+        get_assignment,
+    )
+    from services.file_parser import (
+        group_files_by_student,
+        parse_python_file,
+        extract_screenshot_text,
+    )
+    from services.llm_provider import LLMProvider
+    from services.grader import GradingService
+    from config import get_config, set_provider
 
 app = FastAPI()
 
