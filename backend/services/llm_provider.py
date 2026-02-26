@@ -3,6 +3,7 @@ import json
 import random
 from typing import Optional
 
+# Support both running as a package (from project root) and directly (from backend dir)
 try:
     from ..config import get_config
 except ImportError:

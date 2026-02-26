@@ -9,6 +9,7 @@ from typing import Optional
 import base64
 import json
 
+# Support both running as a package (from project root) and directly (from backend dir)
 try:
     from .db.database import (
         create_assignment,
